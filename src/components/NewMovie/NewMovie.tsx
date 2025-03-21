@@ -6,10 +6,6 @@ type Props = {
   onAdd: (movie: Movie) => void;
 };
 export const NewMovie: React.FC<Props> = ({ onAdd }) => {
-  // Increase the count after successful form submission
-  // to reset touched status of all the `Field`s
-
-  // Manage form state
   const [count, setCount] = useState(0);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -17,7 +13,6 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
   const [imdbUrl, setImdbUrl] = useState('');
   const [imdbId, setImdbId] = useState('');
 
-  // Create object of form data
   const data = {
     title: title.trim(),
     description: description.trim(),
@@ -26,7 +21,6 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
     imdbId: imdbId.trim(),
   };
 
-  // Check if form is valid
   const isFormValid = Boolean(
     data.title && data.imgUrl && data.imdbUrl && data.imdbId,
   );
@@ -38,22 +32,17 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
     }
 
     onAdd(data);
-
-    // Reset form
     setTitle('');
     setDescription('');
     setImgUrl('');
     setImdbUrl('');
     setImdbId('');
-
-    // Increase the count
     setCount(count + 1);
   }
 
   return (
     <form className="NewMovie" key={count} onSubmit={handleSubmit}>
       <h2 className="title">Add a movie</h2>
-
       <TextField
         name="title"
         label="Title"
@@ -61,14 +50,12 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
         onChange={setTitle}
         required
       />
-
       <TextField
         name="description"
         label="Description"
         value={description}
         onChange={setDescription}
       />
-
       <TextField
         name="imgUrl"
         label="Image URL"
@@ -76,7 +63,6 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
         required
         onChange={setImgUrl}
       />
-
       <TextField
         name="imdbUrl"
         label="Imdb URL"
@@ -84,15 +70,13 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
         required
         onChange={setImdbUrl}
       />
-
       <TextField
         name="imdbId"
         label="Imdb ID"
         value={imdbId}
-        onChange={setImdbId}
         required
+        onChange={setImdbId}
       />
-
       <div className="field is-grouped">
         <div className="control">
           <button
